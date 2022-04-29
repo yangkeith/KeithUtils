@@ -7,11 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * <p>Description: </p>
  *
  * @author Keith
- * @date 2022/04/02 10:17
- * ------------------- History -------------------
- * <date>      <author>       <desc>
- * 2022/04/02  Keith  初始创建
- * -----------------------------------------------
+ * @date 2022/04/02 10:20
  */
 public class NamedThreadFactory implements ThreadFactory{
     

@@ -11,10 +11,6 @@ import java.io.IOException;
  *
  * @author Keith
  * @date 2022/04/02 10:21
- * ------------------- History -------------------
- * <date>      <author>       <desc>
- * 2022/04/02  Keith  初始创建
- * -----------------------------------------------
  */
 public class QuietlyUtil {
     public static void closeQuietly(Closeable... closeables) {

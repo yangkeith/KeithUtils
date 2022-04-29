@@ -15,10 +15,6 @@ import java.util.Objects;
  *
  * @author Keith
  * @date 2022/04/02 10:19
- * ------------------- History -------------------
- * <date>      <author>       <desc>
- * 2022/04/02  Keith  初始创建
- * -----------------------------------------------
  */
 public class ObjectUtil {
     /**

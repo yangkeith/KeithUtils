@@ -14,10 +14,6 @@ import java.util.Set;
  *
  * @author Keith
  * @date 2022/04/02 10:29
- * ------------------- History -------------------
- * <date>      <author>       <desc>
- * 2022/04/02  Keith  初始创建
- * -----------------------------------------------
  */
 public class TypeDef<T> {
     public static final TypeDef LIST_STRING = new TypeDef<List<String>>() {};
@@ -27,7 +23,6 @@ public class TypeDef<T> {
     public static final TypeDef LIST_FLOAT= new TypeDef<List<Float>>() {};
     public static final TypeDef LIST_BIGINTEGER = new TypeDef<List<BigInteger>>() {};
     public static final TypeDef LIST_BIGDECIMAL = new TypeDef<List<BigDecimal>>() {};
-    
     
     public static final TypeDef SET_STRING = new TypeDef<Set<String>>() {};
     public static final TypeDef SET_INTEGER = new TypeDef<Set<Integer>>() {};

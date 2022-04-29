@@ -17,10 +17,6 @@ import java.util.zip.ZipFile;
  *
  * @author Keith
  * @date 2022/04/02 10:10
- * ------------------- History -------------------
- * <date>      <author>       <desc>
- * 2022/04/02  Keith  初始创建
- * -----------------------------------------------
  */
 public class FileUtil {
     public static String getSuffix(String fileName) {
@@ -30,6 +26,22 @@ public class FileUtil {
         return null;
     }
     
+    public static String getFileExt(String fileName){
+        if (fileName != null && fileName.contains(".")) {
+            return fileName.substring(fileName.lastIndexOf(".")+1);
+        }
+        return null;
+    }
+    
+    public static String getFileSimpleName(String fileName){
+        if (fileName != null && fileName.contains(".")) {
+            if(fileName.contains(File.separator)){
+                fileName = fileName.substring(fileName.lastIndexOf(File.separator)+1);
+            }
+            return  fileName.substring(0,fileName.lastIndexOf("."));
+        }
+        return null;
+    }
     
     public static String removePrefix(String src, String prefix) {
         if (src != null && src.startsWith(prefix)) {

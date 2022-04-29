@@ -14,10 +14,6 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author Keith
  * @date 2022/04/02 10:05
- * ------------------- History -------------------
- * <date>      <author>       <desc>
- * 2022/04/02  Keith  初始创建
- * -----------------------------------------------
  */
 public class ClassUtil {
     private static Log LOG = Log.getLog(ClassUtil.class);

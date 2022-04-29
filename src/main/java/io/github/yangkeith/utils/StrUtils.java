@@ -21,10 +21,6 @@ import java.util.regex.Pattern;
  *
  * @author Keith
  * @date 2022/04/02 09:39
- * ------------------- History -------------------
- * <date>      <author>       <desc>
- * 2022/04/02  Keith  初始创建
- * -----------------------------------------------
  */
 public class StrUtils extends StrKit{
     private static final Log log = Log.getLog(StrUtils.class);

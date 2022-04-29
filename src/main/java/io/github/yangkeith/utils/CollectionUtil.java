@@ -10,10 +10,6 @@ import java.util.Map;
  *
  * @author Keith
  * @date 2022/04/02 10:08
- * ------------------- History -------------------
- * <date>      <author>       <desc>
- * 2022/04/02  Keith  初始创建
- * -----------------------------------------------
  */
 public class CollectionUtil {
     

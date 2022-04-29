@@ -8,10 +8,6 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Keith
  * @date 2022/04/02 10:23
- * ------------------- History -------------------
- * <date>      <author>       <desc>
- * 2022/04/02  Keith  初始创建
- * -----------------------------------------------
  */
 public class RequestUtil {
     static String[] mobileAgents = {"iphone", "android", "phone", "mobile", "wap", "netfront", "java", "opera mobi",

@@ -6,10 +6,6 @@ package io.github.yangkeith.enums;
  *
  * @author Keith
  * @date 2022/04/02 15:34
- * ------------------- History -------------------
- * <date>      <author>       <desc>
- * 2022/04/02  Keith  初始创建
- * -----------------------------------------------
  */
 public enum Unit {
     // 长度 - 一维

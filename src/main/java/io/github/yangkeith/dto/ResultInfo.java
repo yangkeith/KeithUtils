@@ -10,10 +10,6 @@ import lombok.Data;
  *
  * @author keith
  * @date 2021/12/20 15:44
- * ------------------- History -------------------
- * <date>      <author>       <desc>
- * 2021/12/20  keith  初始创建
- * -----------------------------------------------
  */
 @Data
 @ApiModel(value = "返回的结果集")

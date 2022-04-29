@@ -15,10 +15,6 @@ import java.util.*;
  *
  * @author Keith
  * @date 2022/04/02 10:09
- * ------------------- History -------------------
- * <date>      <author>       <desc>
- * 2022/04/02  Keith  初始创建
- * -----------------------------------------------
  */
 public class DateUtil {
     public static String datePatternWithoutDividing = "yyyyMMdd";

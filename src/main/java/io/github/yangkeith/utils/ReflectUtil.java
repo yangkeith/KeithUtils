@@ -16,10 +16,6 @@ import java.util.function.Predicate;
  *
  * @author Keith
  * @date 2022/04/02 10:21
- * ------------------- History -------------------
- * <date>      <author>       <desc>
- * 2022/04/02  Keith  初始创建
- * -----------------------------------------------
  */
 public class ReflectUtil {
     public static <T> T getStaticFieldValue(Class<?> dClass, String fieldName) {

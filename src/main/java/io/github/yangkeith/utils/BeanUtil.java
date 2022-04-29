@@ -21,10 +21,6 @@ import java.util.Map;
  *
  * @author Keith
  * @date 2022/04/13 16:53
- * ------------------- History -------------------
- * <date>      <author>       <desc>
- * 2022/04/13  Keith  初始创建
- * -----------------------------------------------
  */
 public class BeanUtil {
     
@@ -293,5 +289,22 @@ public class BeanUtil {
         if (!flag) {
             throw new IllegalAccessException(fieldName + " field does not exit");
         }
+    }
+    
+    public static boolean hasField(Object object, String fieldName){
+        for (Field f : object.getClass().getDeclaredFields()) {
+            if (f.getName().equals(fieldName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static boolean hasField(Class<?> clazz, String fieldName){
+        for (Field f : clazz.getDeclaredFields()) {
+            if (f.getName().equals(fieldName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
