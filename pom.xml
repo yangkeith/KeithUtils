@@ -6,7 +6,7 @@
 
     <groupId>io.github.yangkeith</groupId>
     <artifactId>utils</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <name>KeithUtils</name>
     <description>A tool class library for your own use</description>
     <url>https://github.com/yangkeith/KeithUtils</url>
