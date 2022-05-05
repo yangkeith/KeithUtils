@@ -3,6 +3,8 @@ package io.github.yangkeith.utils;
 import com.jfinal.core.JFinal;
 import com.jfinal.kit.LogKit;
 import com.jfinal.kit.PathKit;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.TrueFileFilter;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -175,4 +177,27 @@ public class FileUtil {
         }
     }
     
+    public static Collection<File> localListFiles(String path) {
+        return localListFiles(new File(path));
+    }
+    
+    /**
+     * 遍历目录下的所有文件
+     *
+     * @param path 目录
+     */
+    public static Collection<File> localListFiles(File path) {
+        Collection<File> fileCollection = new ArrayList<>();
+        if (path != null && path.exists() && path.isDirectory()) {
+            /**
+             * targetDir：不要为 null、不要是文件、不要不存在
+             * 第二个 文件过滤 参数如果为 FalseFileFilter.FALSE ，则不会查询任何文件
+             * 第三个 目录过滤 参数如果为 FalseFileFilter.FALSE , 则只获取目标文件夹下的一级文件，而不会迭代获取子文件夹下的文件
+             */
+           //  fileCollection = FileUtils.listFiles(path, TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
+            File[] files= path.listFiles();
+            fileCollection.addAll(Arrays.asList(files));
+        }
+        return fileCollection;
+    }
 }
