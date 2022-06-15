@@ -4,10 +4,8 @@ import com.jfinal.log.Log;
 
 import javax.net.ssl.*;
 import java.io.*;
-import java.net.ConnectException;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.security.cert.X509Certificate;
 
 /**
@@ -92,17 +90,20 @@ public class HttpUtils {
             String urlNameString = url;
             log.info("sendPost - {%s}", urlNameString);
             URL realUrl = new URL(urlNameString);
-            URLConnection conn = realUrl.openConnection();
+            HttpURLConnection conn = (HttpURLConnection) realUrl.openConnection();
+            conn.setRequestMethod("POST");
             conn.setRequestProperty("accept", "*/*");
             conn.setRequestProperty("connection", "Keep-Alive");
             conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             conn.setRequestProperty("Accept-Charset", "utf-8");
             conn.setRequestProperty("contentType", "utf-8");
+            conn.setRequestProperty("Content-type", "application/json");
             conn.setDoOutput(true);
             conn.setDoInput(true);
             out = new PrintWriter(conn.getOutputStream());
             out.print(param);
             out.flush();
+            out.close();
             in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
             String line;
             while ((line = in.readLine()) != null) {

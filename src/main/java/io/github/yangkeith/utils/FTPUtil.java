@@ -1,14 +1,13 @@
 package io.github.yangkeith.utils;
 
-import org.apache.commons.lang3.StringUtils;
+import com.jcraft.jsch.*;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.net.Socket;
+import java.util.*;
 
 /**
  * @program: KeithUtils
@@ -49,7 +48,7 @@ public class FTPUtil {
             ftpClient.setControlEncoding(controlEncoding);
             
             ftpClient.connect(addr, port);
-            if (StringUtils.isBlank(username)) {
+            if (StrUtils.isBlank(username)) {
                 ftpClient.login("Anonymous", "");
             } else {
                 ftpClient.login(username, password);
@@ -102,7 +101,7 @@ public class FTPUtil {
             System.out.println(">>>>>FTP服务器连接已经关闭或者连接无效*********");
             return;
         }
-        if (StringUtils.isBlank(absoluteLocalDirectory) || StringUtils.isBlank(relativeRemotePath)) {
+        if (StrUtils.isBlank(absoluteLocalDirectory) || StrUtils.isBlank(relativeRemotePath)) {
             System.out.println(">>>>>下载时遇到本地存储路径或者ftp服务器文件路径为空，放弃...*********");
             return;
         }
@@ -119,7 +118,7 @@ public class FTPUtil {
                 }
                 OutputStream outputStream = new FileOutputStream(localFile);
                 String workDir = relativeRemotePath.substring(0, relativeRemotePath.lastIndexOf("\\"));
-                if (StringUtils.isBlank(workDir)) {
+                if (StrUtils.isBlank(workDir)) {
                     workDir = "/";
                 }
                 ftpClient.changeWorkingDirectory(workDir);
@@ -194,16 +193,25 @@ public class FTPUtil {
                         ftpClient.changeToParentDirectory();
                     } else {
                         FileInputStream input = new FileInputStream(loopFile);
-                        ftpClient.storeFile(loopFile.getName(), input);
+                        boolean flag =ftpClient.storeFile(loopFile.getName(), input);
                         input.close();
-                        System.out.println(">>>>>文件上传成功****" + loopFile.getPath());
+                        if(flag){
+                            System.out.println(">>>>>文件上传成功****" +loopFile.getPath());
+                        }else {
+                            System.out.println(">>>>>文件上传失败****" + loopFile.getPath());
+                        }
                     }
                 }
             } else {
                 FileInputStream input = new FileInputStream(uploadFile);
-                ftpClient.storeFile(uploadFile.getName(), input);
+                boolean flag = ftpClient.storeFile(uploadFile.getName(), input);
                 input.close();
-                System.out.println(">>>>>文件上传成功****" + uploadFile.getPath());
+                if(flag){
+                    System.out.println(">>>>>文件上传成功****" + uploadFile.getPath());
+                }else {
+                    System.out.println(">>>>>文件上传失败****" + uploadFile.getPath());
+                }
+                
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -220,7 +228,7 @@ public class FTPUtil {
      * @param FileDir ：与 FTP 目录进行同步的本地目录
      */
     public static void syncFiles(FTPClient ftpClient, String FileDir) throws IOException {
-        if (!ftpClient.isConnected() || !ftpClient.isAvailable() || StringUtils.isBlank(FileDir)) {
+        if (!ftpClient.isConnected() || !ftpClient.isAvailable() || StrUtils.isBlank(FileDir)) {
             System.out.println(">>>>>FTP服务器连接已经关闭或者连接无效*********");
             return;
         }
@@ -259,4 +267,57 @@ public class FTPUtil {
         }
     }
     
+    private static  String determineServerProtocol(String host, String port) {
+        PrintWriter out = null;
+        BufferedReader in = null;
+        String result = "";
+        try (Socket socket = new Socket(host, Integer.parseInt(port))) {
+            out = new PrintWriter(socket.getOutputStream(), true);
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            result = in.readLine();
+            out.close();
+            in.close();
+        } catch (NumberFormatException | IOException e) {
+            e.printStackTrace();
+        }
+        String s = null;
+        if (result.contains("SSH")) {
+            System.out.println("Server is SFTP");
+            // do things...
+        } else {
+            System.out.println("Server is FTP");
+            // do things...
+        }
+        return s;
+    }
+    
+    public static void main(String[] args) throws JSchException, SftpException {
+        // FTPClient client = FTPUtil.connectFtpServer("192.168.1.222",21,"map","sagis");
+        // FTPUtil.uploadFiles(client,new File("D:\\Mine\\Desktop\\唐山疫情一张图接口文档V1 (1).pdf"));
+        // List<String> files = new ArrayList<>();
+        // FTPUtil.loopServerPath(client,"",files);
+        // for (String file : files) {
+        //     System.out.println(file);
+        // }
+        // FTPUtil.closeFTPConnect(client);
+        determineServerProtocol("192.168.1.160","22");
+        ChannelSftp client = new ChannelSftp();
+        JSch jsch = new JSch();
+        Session sshSession = jsch.getSession("root", "192.168.1.160", 22);
+        // 添加s密码
+        sshSession.setPassword("sagis");
+        Properties sshConfig = new Properties();
+        sshConfig.put("StrictHostKeyChecking", "no");
+        sshSession.setConfig(sshConfig);
+        // 开启sshSession链接
+        sshSession.connect();
+        // 获取sftp通道
+        client = (ChannelSftp) sshSession.openChannel("sftp");
+        Vector files = client.ls("/etc");
+        for (Object file : files) {
+            System.out.println(file);
+        }
+        // 开启
+        client.connect();
+    }
 }
