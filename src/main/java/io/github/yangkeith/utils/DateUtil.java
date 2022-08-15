@@ -118,7 +118,7 @@ public class DateUtil {
     
     
     public static Date parseDate(String dateString) {
-        if (StrUtils.isBlank(dateString)) {
+        if (StringUtil.isBlank(dateString)) {
             return null;
         }
         dateString = dateString.trim();
@@ -161,7 +161,7 @@ public class DateUtil {
     
     
     public static Date parseDate(String dateString, String pattern) {
-        if (StrUtils.isBlank(dateString)) {
+        if (StringUtil.isBlank(dateString)) {
             return null;
         }
         try {

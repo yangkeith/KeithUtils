@@ -48,7 +48,7 @@ public class FTPUtil {
             ftpClient.setControlEncoding(controlEncoding);
             
             ftpClient.connect(addr, port);
-            if (StrUtils.isBlank(username)) {
+            if (StringUtil.isBlank(username)) {
                 ftpClient.login("Anonymous", "");
             } else {
                 ftpClient.login(username, password);
@@ -101,7 +101,7 @@ public class FTPUtil {
             System.out.println(">>>>>FTP服务器连接已经关闭或者连接无效*********");
             return;
         }
-        if (StrUtils.isBlank(absoluteLocalDirectory) || StrUtils.isBlank(relativeRemotePath)) {
+        if (StringUtil.isBlank(absoluteLocalDirectory) || StringUtil.isBlank(relativeRemotePath)) {
             System.out.println(">>>>>下载时遇到本地存储路径或者ftp服务器文件路径为空，放弃...*********");
             return;
         }
@@ -118,7 +118,7 @@ public class FTPUtil {
                 }
                 OutputStream outputStream = new FileOutputStream(localFile);
                 String workDir = relativeRemotePath.substring(0, relativeRemotePath.lastIndexOf("\\"));
-                if (StrUtils.isBlank(workDir)) {
+                if (StringUtil.isBlank(workDir)) {
                     workDir = "/";
                 }
                 ftpClient.changeWorkingDirectory(workDir);
@@ -228,7 +228,7 @@ public class FTPUtil {
      * @param FileDir ：与 FTP 目录进行同步的本地目录
      */
     public static void syncFiles(FTPClient ftpClient, String FileDir) throws IOException {
-        if (!ftpClient.isConnected() || !ftpClient.isAvailable() || StrUtils.isBlank(FileDir)) {
+        if (!ftpClient.isConnected() || !ftpClient.isAvailable() || StringUtil.isBlank(FileDir)) {
             System.out.println(">>>>>FTP服务器连接已经关闭或者连接无效*********");
             return;
         }

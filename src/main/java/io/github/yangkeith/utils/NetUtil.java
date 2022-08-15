@@ -43,6 +43,6 @@ public class NetUtil {
         }
         
         // 优先使用配置的外网IP地址
-        return StrUtils.isNotBlank(siteLocalIpAddress) ? siteLocalIpAddress : hostIpAddress;
+        return StringUtil.isNotBlank(siteLocalIpAddress) ? siteLocalIpAddress : hostIpAddress;
     }
 }

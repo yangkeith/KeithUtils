@@ -14,7 +14,7 @@ import java.security.cert.X509Certificate;
  * @author Keith
  */
 public class HttpUtils {
-    private static final Log log = Log.getLog(StrUtils.class);
+    private static final Log log = Log.getLog(HttpUtils.class);
     /**
      * 向指定 URL 发送GET方法的请求
      *
@@ -39,7 +39,7 @@ public class HttpUtils {
         BufferedReader in = null;
         try {
             String urlNameString = url + "?" + param;
-            if(StrUtils.isBlank(param)){
+            if(StringUtil.isBlank(param)){
                 urlNameString = url;
             }
             log.info("sendGet - {%s}", urlNameString);

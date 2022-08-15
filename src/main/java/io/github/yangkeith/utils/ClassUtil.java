@@ -150,7 +150,7 @@ public class ClassUtil {
             if (Modifier.isStatic(method.getModifiers())
                     && Modifier.isPublic(method.getModifiers())
                     && method.getReturnType() == clazz) {
-                if (StrUtils.isBlank(name)) {
+                if (StringUtil.isBlank(name)) {
                     return method;
                 } else if (name.equals(method.getName())) {
                     return method;

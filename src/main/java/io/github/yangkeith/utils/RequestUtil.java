@@ -48,7 +48,7 @@ public class RequestUtil {
      */
     public static boolean isMobileBrowser(HttpServletRequest request) {
         String ua = request.getHeader("User-Agent");
-        if (StrUtils.isNotBlank(ua)) {
+        if (StringUtil.isNotBlank(ua)) {
             ua = ua.toLowerCase();
             for (String mobileAgent : mobileAgents) {
                 if (ua.indexOf(mobileAgent) > -1) {
@@ -66,7 +66,7 @@ public class RequestUtil {
      */
     public static boolean isWechatBrowser(HttpServletRequest request) {
         String ua = request.getHeader("User-Agent");
-        return StrUtils.isNotBlank(ua) && ua.toLowerCase().contains("micromessenger");
+        return StringUtil.isNotBlank(ua) && ua.toLowerCase().contains("micromessenger");
     }
     
     
@@ -78,7 +78,7 @@ public class RequestUtil {
      */
     public static boolean isWechatPcBrowser(HttpServletRequest request) {
         String ua = request.getHeader("User-Agent");
-        return StrUtils.isNotBlank(ua) && ua.toLowerCase().contains("windowswechat");
+        return StringUtil.isNotBlank(ua) && ua.toLowerCase().contains("windowswechat");
     }
     
     /**
@@ -88,7 +88,7 @@ public class RequestUtil {
      */
     public static boolean isIEBrowser(HttpServletRequest request) {
         String ua = request.getHeader("User-Agent");
-        if (StrUtils.isBlank(ua)) {
+        if (StringUtil.isBlank(ua)) {
             return false;
         }
         
@@ -106,22 +106,22 @@ public class RequestUtil {
     
     public static String getIpAddress(HttpServletRequest request) {
         String ip = request.getHeader("X-Forwarded-For");
-        if (StrUtils.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
+        if (StringUtil.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("X-Real-IP");
         }
-        if (StrUtils.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
+        if (StringUtil.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");
         }
-        if (StrUtils.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
+        if (StringUtil.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("WL-Proxy-Client-IP");
         }
-        if (StrUtils.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
+        if (StringUtil.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("HTTP_CLIENT_IP");
         }
-        if (StrUtils.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
+        if (StringUtil.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("HTTP_X_FORWARDED_FOR");
         }
-        if (StrUtils.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
+        if (StringUtil.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
         }
         
@@ -161,7 +161,7 @@ public class RequestUtil {
     public static String getCurrentUrl(HttpServletRequest request) {
         String queryString = request.getQueryString();
         String url = getBaseUrl(request) + request.getServletPath();
-        if (StrUtils.isNotBlank(queryString)) {
+        if (StringUtil.isNotBlank(queryString)) {
             url = url.concat("?").concat(queryString);
         }
         return url;
@@ -170,6 +170,6 @@ public class RequestUtil {
     
     
     public static String getCurrentEncodeUrl(HttpServletRequest request) {
-        return StrUtils.urlEncode(getCurrentUrl(request));
+        return StringUtil.urlEncode(getCurrentUrl(request));
     }
 }

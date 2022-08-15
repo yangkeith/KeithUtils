@@ -28,7 +28,7 @@ public class ReflectUtil {
     
     private static <T> T getFieldValue(Class<?> dClass, String fieldName, Object getFrom) {
         try {
-            if (StrUtils.isBlank(fieldName)) {
+            if (StringUtil.isBlank(fieldName)) {
                 throw new IllegalArgumentException("fieldName must not be null or empty.");
             }
             Field field = searchField(dClass, f -> f.getName().equals(fieldName));

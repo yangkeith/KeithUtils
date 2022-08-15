@@ -22,8 +22,8 @@ import java.util.regex.Pattern;
  * @author Keith
  * @date 2022/04/02 09:39
  */
-public class StrUtils extends StrKit{
-    private static final Log log = Log.getLog(StrUtils.class);
+public class StringUtil extends StrKit{
+    private static final Log log = Log.getLog(StringUtil.class);
     
     public static final String EMPTY = "";
     public static final String SPACE = " ";

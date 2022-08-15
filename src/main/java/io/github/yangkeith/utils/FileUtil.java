@@ -166,7 +166,7 @@ public class FileUtil {
     
     
     public static boolean isAbsolutePath(String path) {
-        return StrUtils.isNotBlank(path) && (path.startsWith("/") || path.indexOf(":") > 0);
+        return StringUtil.isNotBlank(path) && (path.startsWith("/") || path.indexOf(":") > 0);
     }
     
     public static String getCanonicalPath(File file) {

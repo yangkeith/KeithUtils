@@ -190,7 +190,7 @@ public class ObjectUtil {
         }
         
         String s = value.toString();
-        if (StrUtils.isNumeric(s)) {
+        if (StringUtil.isNumeric(s)) {
             return new Date(Long.parseLong(s));
         }
         return DateUtil.parseDate(s);
