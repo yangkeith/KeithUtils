@@ -4,7 +4,7 @@
 <dependency>
     <groupId>io.github.yangkeith</groupId>
     <artifactId>utils</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
 </dependency>
 ```
 > 代码如果出现类似情况纯属巧合。 
