@@ -267,6 +267,15 @@ public class FTPUtil {
         }
     }
     
+    /**
+     * 确定服务器协议
+     *
+     * @param host 宿主
+     * @param port 港口
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     private static  String determineServerProtocol(String host, String port) {
         PrintWriter out = null;
         BufferedReader in = null;

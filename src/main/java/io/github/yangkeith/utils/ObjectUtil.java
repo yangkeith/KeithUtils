@@ -30,18 +30,14 @@ public class ObjectUtil {
         if (objects == null || objects.isEmpty() || compareObject == null) {
             return false;
         }
-        
         if (compareAttrGetters == null || compareAttrGetters.length == 0) {
             throw new IllegalArgumentException("compareAttrGetters must not be null");
         }
-        
-        
         for (T object : objects) {
             if (isSameObject(object, compareObject, compareAttrGetters)) {
                 return true;
             }
         }
-        
         return false;
     }
     
@@ -59,18 +55,14 @@ public class ObjectUtil {
         if (objects == null || objects.isEmpty() || compareObject == null) {
             return null;
         }
-        
         if (compareAttrGetters == null || compareAttrGetters.length == 0) {
             throw new IllegalArgumentException("compareAttrGetters must not be null");
         }
-        
-        
         for (T object : objects) {
             if (isSameObject(object, compareObject, compareAttrGetters)) {
                 return object;
             }
         }
-        
         return null;
     }
     
@@ -88,24 +80,17 @@ public class ObjectUtil {
         if (object1 == null || object2 == null) {
             return object1 == object2;
         }
-        
         if (compareAttrGetters == null || compareAttrGetters.length == 0) {
             throw new IllegalArgumentException("compareAttrGetters must not be null");
         }
-        
-        
         for (ObjectFunc getter : compareAttrGetters) {
-            
             if (getter == null) {
                 throw new IllegalArgumentException("compareAttrGetter must not be null");
             }
-            
-            
             if (!Objects.equals(getter.get(object1), getter.get(object2))) {
                 return false;
             }
         }
-        
         return true;
     }
     
@@ -124,6 +109,15 @@ public class ObjectUtil {
     }
     
     
+    /**
+     * 转换
+     *
+     * @param value       价值
+     * @param targetClass 目标类
+     * @return {@link Object }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Object convert(Object value, Class<?> targetClass) {
         if (value.getClass().isAssignableFrom(targetClass)) {
             return value;
@@ -179,16 +173,22 @@ public class ObjectUtil {
             }
             return Short.parseShort(value.toString());
         }
-        
         throw new RuntimeException("\"" + targetClass.getName() + "\" can not be parsed.");
     }
     
     
+    /**
+     * 解析日期
+     *
+     * @param value 价值
+     * @return {@link Date }
+     * @author Keith
+     * @date 2022-08-17
+     */
     private static Date parseDate(Object value) {
         if (value instanceof Number) {
             return new Date(((Number) value).longValue());
         }
-        
         String s = value.toString();
         if (StringUtil.isNumeric(s)) {
             return new Date(Long.parseLong(s));
@@ -196,6 +196,14 @@ public class ObjectUtil {
         return DateUtil.parseDate(s);
     }
     
+    /**
+     * 获取原始默认价值
+     *
+     * @param paraClass 帕拉类
+     * @return {@link Object }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Object getPrimitiveDefaultValue(Class<?> paraClass) {
         if (paraClass == int.class || paraClass == long.class || paraClass == float.class || paraClass == double.class) {
             return 0;

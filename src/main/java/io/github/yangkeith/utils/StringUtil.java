@@ -28,6 +28,14 @@ public class StringUtil extends StrKit{
     public static final String EMPTY = "";
     public static final String SPACE = " ";
     
+    /**
+     * url解码
+     *
+     * @param string 字符串
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String urlDecode(String string) {
         try {
             return URLDecoder.decode(string, JFinal.me().getConstants().getEncoding());
@@ -37,6 +45,14 @@ public class StringUtil extends StrKit{
         return string;
     }
     
+    /**
+     * url编码
+     *
+     * @param string 字符串
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String urlEncode(String string) {
         try {
             return URLEncoder.encode(string, JFinal.me().getConstants().getEncoding());
@@ -46,6 +62,14 @@ public class StringUtil extends StrKit{
         return string;
     }
     
+    /**
+     * url重定向
+     *
+     * @param redirect 重定向
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String urlRedirect(String redirect) {
         try {
             redirect = new String(redirect.getBytes(JFinal.me().getConstants().getEncoding()), "ISO8859_1");
@@ -57,11 +81,18 @@ public class StringUtil extends StrKit{
     
     private static final Map<String, String> EMPTY_MAP = new HashMap<>();
     
+    /**
+     * 查询字符串映射
+     *
+     * @param queryString 查询字符串
+     * @return {@link Map }<{@link String }, {@link String }>
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Map<String, String> queryStringToMap(String queryString) {
         if (isBlank(queryString)) {
             return EMPTY_MAP;
         }
-        
         Map<String, String> map = new HashMap<>();
         String[] params = queryString.split("&");
         for (String paramPair : params) {
@@ -76,13 +107,19 @@ public class StringUtil extends StrKit{
     }
     
     
+    /**
+     * 地图查询字符串
+     *
+     * @param map 地图
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String mapToQueryString(Map map) {
         if (map == null || map.isEmpty()) {
             return EMPTY;
         }
-        
         StringBuilder sb = new StringBuilder();
-        
         for (Object key : map.keySet()) {
             if (key == null || key.equals(EMPTY)) {
                 continue;
@@ -90,22 +127,26 @@ public class StringUtil extends StrKit{
             if (sb.length() > 0) {
                 sb.append("&");
             }
-            
             sb.append(key.toString().trim());
             sb.append("=");
             Object value = map.get(key);
             sb.append(value == null ? EMPTY : urlEncode(value.toString().trim()));
         }
-        
-        
         return sb.toString();
     }
     
+    /**
+     * 不是空
+     *
+     * @param strs str
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static boolean areNotEmpty(String... strs) {
         if (strs == null || strs.length == 0) {
             return false;
         }
-        
         for (String string : strs) {
             if (string == null || EMPTY.equals(string)) {
                 return false;
@@ -114,11 +155,18 @@ public class StringUtil extends StrKit{
         return true;
     }
     
+    /**
+     * 任何空白
+     *
+     * @param strs str
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static boolean isAnyBlank(String... strs) {
         if (strs == null || strs.length == 0) {
             return false;
         }
-        
         for (String str : strs) {
             if (isBlank(str)) {
                 return true;
@@ -127,6 +175,14 @@ public class StringUtil extends StrKit{
         return false;
     }
     
+    /**
+     * 需要非空白
+     *
+     * @param str str
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String requireNonBlank(String str) {
         if (isBlank(str)) {
             throw new NullPointerException();
@@ -134,6 +190,15 @@ public class StringUtil extends StrKit{
         return str;
     }
     
+    /**
+     * 需要非空白
+     *
+     * @param str     str
+     * @param message 消息
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String requireNonBlank(String str, String message) {
         if (isBlank(str)) {
             throw new NullPointerException(message);
@@ -141,12 +206,30 @@ public class StringUtil extends StrKit{
         return str;
     }
     
+    /**
+     * 获取默认如果空白
+     *
+     * @param value        价值
+     * @param defaultValue 默认值
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     @Deprecated
     public static String obtainDefaultIfBlank(String value, String defaultValue) {
         return obtainDefault(value, defaultValue);
     }
     
     
+    /**
+     * 获取默认
+     *
+     * @param value        价值
+     * @param defaultValue 默认值
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String obtainDefault(String value, String defaultValue) {
         return isBlank(value) ? defaultValue : value;
     }
@@ -297,7 +380,6 @@ public class StringUtil extends StrKit{
         if (src == null) {
             return null;
         }
-        
         String[] strings = src.split(regex);
         Set<String> set = new LinkedHashSet<>();
         for (String s : strings) {
@@ -313,54 +395,89 @@ public class StringUtil extends StrKit{
     private static final String[] htmlChars = {"&", "<", ">", "'", "\""};
     private static final String[] escapeChars = {"&amp;", "&lt;", "&gt;", "&#39;", "&quot;"};
     
+    /**
+     * 转义html
+     *
+     * @param content 内容
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String escapeHtml(String content) {
         return isBlank(content) ? content : StringUtils.replaceEach(unEscapeHtml(content), htmlChars, escapeChars);
     }
     
+    /**
+     * 联合国转义html
+     *
+     * @param content 内容
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String unEscapeHtml(String content) {
         return isBlank(content) ? content : StringUtils.replaceEach(content, escapeChars, htmlChars);
     }
     
+    /**
+     * 逃逸模型
+     *
+     * @param model       模型
+     * @param ignoreAttrs 忽略attrs
+     * @return {@link Model }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Model escapeModel(Model model, String... ignoreAttrs) {
         String[] attrNames = model._getAttrNames();
         for (String attr : attrNames) {
-            
             if (ArrayUtils.contains(ignoreAttrs, attr)) {
                 continue;
             }
-            
             Object value = model.get(attr);
-            
             if (value != null && value instanceof String) {
                 model.set(attr, escapeHtml(value.toString()));
             }
         }
-        
         return model;
     }
     
+    /**
+     * 逃生图
+     *
+     * @param map        地图
+     * @param ignoreKeys 忽略键
+     * @return {@link Map }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Map escapeMap(Map map, Object... ignoreKeys) {
         if (map == null || map.isEmpty()) {
             return map;
         }
-        
         Set<? extends Object> keys = map.keySet();
         for (Object key : keys) {
             if (ArrayUtils.contains(ignoreKeys, key)) {
                 continue;
             }
-            
             Object value = map.get(key);
-            
             if (value != null && value instanceof String) {
                 map.put(key, escapeHtml(value.toString()));
             }
         }
-        
         return map;
     }
     
     
+    /**
+     * 加入
+     *
+     * @param array 数组
+     * @param split 分裂
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String join(String[] array, String split) {
         if (array == null || array.length == 0) {
             return EMPTY;
@@ -376,11 +493,19 @@ public class StringUtil extends StrKit{
     }
     
     
+    /**
+     * 加入
+     *
+     * @param coll  科尔
+     * @param split 分裂
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String join(Collection<String> coll, String split) {
         if (coll == null || coll.isEmpty()) {
             return EMPTY;
         }
-        
         StringBuilder sb = new StringBuilder();
         boolean isFirst = true;
         for (String s : coll) {

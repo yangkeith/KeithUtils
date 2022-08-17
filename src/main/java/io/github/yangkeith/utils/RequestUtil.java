@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
  * @date 2022/04/02 10:23
  */
 public class RequestUtil {
+    /**
+     * 移动代理
+     *
+     * @see String[]
+     */
     static String[] mobileAgents = {"iphone", "android", "phone", "mobile", "wap", "netfront", "java", "opera mobi",
             "opera mini", "ucweb", "windows ce", "symbian", "series", "webos", "sony", "blackberry", "dopod", "nokia",
             "samsung", "palmsource", "xda", "pieplus", "meizu", "midp", "cldc", "motorola", "foma", "docomo",
@@ -25,17 +30,41 @@ public class RequestUtil {
             "teli", "tim-", "tsm-", "upg1", "upsi", "vk-v", "voda", "wap-", "wapa", "wapi", "wapp", "wapr", "webc",
             "winw", "winw", "xda", "xda-", "googlebot-mobile"};
     
+    /**
+     * ajax请求
+     *
+     * @param request 请求
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static boolean isAjaxRequest(HttpServletRequest request) {
         String header = request.getHeader("X-Requested-With");
         return "XMLHttpRequest".equalsIgnoreCase(header);
     }
     
+    /**
+     * 是json内容类型
+     *
+     * @param request 请求
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static boolean isJsonContentType(HttpServletRequest request) {
         String contentType = request.getContentType();
         return contentType != null && contentType.toLowerCase().contains("application/json");
     }
     
     
+    /**
+     * 多部分请求
+     *
+     * @param request 请求
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static boolean isMultipartRequest(HttpServletRequest request) {
         String contentType = request.getContentType();
         return contentType != null && contentType.toLowerCase().contains("multipart");
@@ -91,19 +120,24 @@ public class RequestUtil {
         if (StringUtil.isBlank(ua)) {
             return false;
         }
-        
         ua = ua.toLowerCase();
         if (ua.contains("msie")) {
             return true;
         }
-        
         if (ua.contains("gecko") && ua.contains("rv:11")) {
             return true;
         }
-        
         return false;
     }
     
+    /**
+     * 获取知识产权地址
+     *
+     * @param request 请求
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String getIpAddress(HttpServletRequest request) {
         String ip = request.getHeader("X-Forwarded-For");
         if (StringUtil.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
@@ -124,7 +158,6 @@ public class RequestUtil {
         if (StringUtil.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
         }
-        
         if (ip != null && ip.contains(",")) {
             String[] ips = ip.split(",");
             for (String strIp : ips) {
@@ -134,20 +167,43 @@ public class RequestUtil {
                 }
             }
         }
-        
         return ip;
     }
     
+    /**
+     * 获取用户代理
+     *
+     * @param request 请求
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String getUserAgent(HttpServletRequest request) {
         return request.getHeader("User-Agent");
     }
     
     
+    /**
+     * 获取推荐人
+     *
+     * @param request 请求
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String getReferer(HttpServletRequest request) {
         return request.getHeader("Referer");
     }
     
     
+    /**
+     * 获取基地url
+     *
+     * @param request 请求
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String getBaseUrl(HttpServletRequest request) {
         int port = request.getServerPort();
         return request.getScheme() + "://" +
@@ -157,7 +213,14 @@ public class RequestUtil {
     }
     
     
-    
+    /**
+     * 获取当前url
+     *
+     * @param request 请求
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String getCurrentUrl(HttpServletRequest request) {
         String queryString = request.getQueryString();
         String url = getBaseUrl(request) + request.getServletPath();
@@ -168,7 +231,14 @@ public class RequestUtil {
     }
     
     
-    
+    /**
+     * 获取当前编码url
+     *
+     * @param request 请求
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String getCurrentEncodeUrl(HttpServletRequest request) {
         return StringUtil.urlEncode(getCurrentUrl(request));
     }

@@ -57,7 +57,7 @@ public class ESUtil {
     /**
      * 获取客户端
      *
-     * @return {@link ElasticsearchTransport  }
+     * @return {@link ElasticsearchClient  }
      * @author Keith
      * @date 2022/07/04
      */
@@ -79,12 +79,11 @@ public class ESUtil {
      */
     public ElasticsearchClient getClient(String ip, Integer port, String username, String password) {
         RestClientBuilder restClientBuilder = RestClient.builder(new HttpHost(ip, port, "http"));
-        if (StringUtil.isNotBlank(username) && StringUtil.isNotBlank(password)) {
+        if (StringUtil.isNotBlank(username)) {
             CredentialsProvider credentialsProvider =
                     new BasicCredentialsProvider();
             credentialsProvider.setCredentials(AuthScope.ANY,
                     new UsernamePasswordCredentials(username, password));
-            
             restClientBuilder.setHttpClientConfigCallback(httpAsyncClientBuilder -> httpAsyncClientBuilder.setDefaultCredentialsProvider(credentialsProvider));
         }
         restClient = restClientBuilder.build();
@@ -326,7 +325,7 @@ public class ESUtil {
      * @date 2022-08-12
      */
     private Property getProperty(String key) {
-        if (StringUtil.isNotEmpty(key)) {
+        if (StringUtil.isNotBlank(key)) {
             switch (key.trim().toUpperCase()) {
                 case "GEOSHAPE":
                     return Property.of(property -> property.geoShape(GeoShapeProperty.of(geoShapeProperty -> geoShapeProperty)));

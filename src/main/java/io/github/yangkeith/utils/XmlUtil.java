@@ -32,7 +32,6 @@ public class XmlUtil {
         for (Element child : elements) {
             Object value = object.get(child.getName());
             Object newValue;
-            
             if (child.elements().size() > 0) {
                 JSONObject jsonObject = xmlToJson(child, new JSONObject(true));
                 if (!jsonObject.isEmpty()) {
@@ -43,7 +42,6 @@ public class XmlUtil {
             } else {
                 newValue = child.getText();
             }
-            
             List<Attribute> attributes = child.attributes();
             if (!attributes.isEmpty()) {
                 JSONObject attrJsonObject = new JSONObject();
@@ -53,7 +51,6 @@ public class XmlUtil {
                 }
                 newValue = attrJsonObject;
             }
-            
             if (newValue != null) {
                 if (value != null) {
                     if (value instanceof JSONArray) {

@@ -13,6 +13,13 @@ import java.util.Enumeration;
  */
 public class NetUtil {
     
+    /**
+     * 获取当地知识产权地址
+     *
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String getLocalIpAddress() {
         String hostIpAddress = null;
         String siteLocalIpAddress = null;// 外网IP

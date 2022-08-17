@@ -21,6 +21,14 @@ import java.util.zip.ZipFile;
  * @date 2022/04/02 10:10
  */
 public class FileUtil {
+    /**
+     * 获取后缀
+     *
+     * @param fileName 文件名称
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String getSuffix(String fileName) {
         if (fileName != null && fileName.contains(".")) {
             return fileName.substring(fileName.lastIndexOf("."));
@@ -28,6 +36,14 @@ public class FileUtil {
         return null;
     }
     
+    /**
+     * 获取文件ext
+     *
+     * @param fileName 文件名称
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String getFileExt(String fileName){
         if (fileName != null && fileName.contains(".")) {
             return fileName.substring(fileName.lastIndexOf(".")+1);
@@ -35,6 +51,14 @@ public class FileUtil {
         return null;
     }
     
+    /**
+     * 获取文件简单名字
+     *
+     * @param fileName 文件名称
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String getFileSimpleName(String fileName){
         if (fileName != null && fileName.contains(".")) {
             if(fileName.contains(File.separator)){
@@ -45,6 +69,15 @@ public class FileUtil {
         return null;
     }
     
+    /**
+     * 删除前缀
+     *
+     * @param src    src
+     * @param prefix 前缀
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String removePrefix(String src, String prefix) {
         if (src != null && src.startsWith(prefix)) {
             return src.substring(prefix.length());
@@ -53,10 +86,26 @@ public class FileUtil {
     }
     
     
+    /**
+     * 删除根路径
+     *
+     * @param src src
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String removeRootPath(String src) {
         return removePrefix(src, PathKit.getWebRootPath());
     }
     
+    /**
+     * 读取字符串
+     *
+     * @param file 文件
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String readString(File file) {
         ByteArrayOutputStream baos = null;
         FileInputStream fis = null;
@@ -76,6 +125,14 @@ public class FileUtil {
         return null;
     }
     
+    /**
+     * 写字符串
+     *
+     * @param file   文件
+     * @param string 字符串
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static void writeString(File file, String string) {
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
@@ -91,22 +148,59 @@ public class FileUtil {
         }
     }
     
+    /**
+     * 关闭
+     *
+     * @param closeable closeable
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static void close(Closeable... closeable) {
         QuietlyUtil.closeQuietly(closeable);
     }
     
     
+    /**
+     * 解压缩
+     *
+     * @param zipFilePath zip文件路径
+     * @return {@link Map }<{@link String }, {@link Object }>
+     * @throws Exception 异常
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Map<String, Object> unzip(String zipFilePath) throws Exception {
         String targetPath = zipFilePath.substring(0, zipFilePath.lastIndexOf("."));
         return unzip(zipFilePath, targetPath, true);
     }
     
     
+    /**
+     * 解压缩
+     *
+     * @param zipFilePath zip文件路径
+     * @param targetPath  目标路径
+     * @return {@link Map }<{@link String }, {@link Object }>
+     * @throws Exception 异常
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Map<String, Object> unzip(String zipFilePath, String targetPath) throws Exception {
         return unzip(zipFilePath, targetPath, true);
     }
     
     
+    /**
+     * 解压缩
+     *
+     * @param zipFilePath zip文件路径
+     * @param targetPath  目标路径
+     * @param safeUnzip   安全解压缩
+     * @return {@link Map }<{@link String }, {@link Object }>
+     * @throws Exception 异常
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Map<String, Object> unzip(String zipFilePath, String targetPath, boolean safeUnzip) throws Exception {
         Map<String, Object> result = new HashMap<>();
         result.put("targetPath",targetPath);
@@ -159,16 +253,40 @@ public class FileUtil {
         return result;
     }
     
+    /**
+     * 是不安全文件
+     *
+     * @param name 名字
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     private static boolean isNotSafeFile(String name) {
         name = name.toLowerCase();
         return name.endsWith(".jsp") || name.endsWith(".jspx");
     }
     
     
+    /**
+     * 是绝对路径
+     *
+     * @param path 路径
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static boolean isAbsolutePath(String path) {
         return StringUtil.isNotBlank(path) && (path.startsWith("/") || path.indexOf(":") > 0);
     }
     
+    /**
+     * 获取规范路径
+     *
+     * @param file 文件
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String getCanonicalPath(File file) {
         try {
             return file.getCanonicalPath();
@@ -177,6 +295,14 @@ public class FileUtil {
         }
     }
     
+    /**
+     * 本地列表文件
+     *
+     * @param path 路径
+     * @return {@link Collection }<{@link File }>
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Collection<File> localListFiles(String path) {
         return localListFiles(new File(path));
     }

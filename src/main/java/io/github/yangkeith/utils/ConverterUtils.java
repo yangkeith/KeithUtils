@@ -16,14 +16,46 @@ public class ConverterUtils {
     
     //region 长度计算
     
+    /**
+     * 长度转换
+     *
+     * @param fromUnit 从单位
+     * @param toUnit   单位
+     * @param value    价值
+     * @return {@link Object }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Object lengthConversion(Unit fromUnit, Unit toUnit, Object value) {
         return lengthConversion(fromUnit, toUnit, value, RoundingMode.HALF_UP);
     }
     
+    /**
+     * 长度转换
+     *
+     * @param fromUnit 从单位
+     * @param toUnit   单位
+     * @param value    价值
+     * @param scale    规模
+     * @return {@link Object }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Object lengthConversion(Unit fromUnit, Unit toUnit, Object value, int scale) {
         return lengthConversion(fromUnit, toUnit, value, scale, RoundingMode.HALF_UP);
     }
     
+    /**
+     * 长度转换
+     *
+     * @param fromUnit 从单位
+     * @param toUnit   单位
+     * @param value    价值
+     * @param mode     模式
+     * @return {@link Object }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Object lengthConversion(Unit fromUnit, Unit toUnit, Object value, RoundingMode mode) {
         BigDecimal fromValue = getUnitBase(fromUnit);
         BigDecimal toValue = getUnitBase(toUnit);
@@ -31,6 +63,18 @@ public class ConverterUtils {
         return lengthConversion(fromUnit, toUnit, value, scale < 0 ? Math.abs(scale) : 0, mode);
     }
     
+    /**
+     * 长度转换
+     *
+     * @param fromUnit 从单位
+     * @param toUnit   单位
+     * @param value    价值
+     * @param scale    规模
+     * @param mode     模式
+     * @return {@link Object }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Object lengthConversion(Unit fromUnit, Unit toUnit, Object value, int scale, RoundingMode mode) {
         if (isLengthUnit(fromUnit) && isLengthUnit(toUnit)) {
             if (isNumber(value)) {
@@ -47,14 +91,46 @@ public class ConverterUtils {
     
     //region 面积计算
     
+    /**
+     * 面积转换
+     *
+     * @param fromUnit 从单位
+     * @param toUnit   单位
+     * @param value    价值
+     * @return {@link Object }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Object areaConversion(Unit fromUnit, Unit toUnit, Object value) {
         return areaConversion(fromUnit, toUnit, value, RoundingMode.HALF_UP);
     }
     
+    /**
+     * 面积转换
+     *
+     * @param fromUnit 从单位
+     * @param toUnit   单位
+     * @param value    价值
+     * @param scale    规模
+     * @return {@link Object }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Object areaConversion(Unit fromUnit, Unit toUnit, Object value, int scale) {
         return areaConversion(fromUnit, toUnit, value, scale, RoundingMode.HALF_UP);
     }
     
+    /**
+     * 面积转换
+     *
+     * @param fromUnit 从单位
+     * @param toUnit   单位
+     * @param value    价值
+     * @param mode     模式
+     * @return {@link Object }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Object areaConversion(Unit fromUnit, Unit toUnit, Object value, RoundingMode mode) {
         BigDecimal fromValue = getUnitBase(fromUnit);
         BigDecimal toValue = getUnitBase(toUnit);
@@ -62,6 +138,18 @@ public class ConverterUtils {
         return areaConversion(fromUnit, toUnit, value, scale < 0 ? Math.abs(scale) : 0, mode);
     }
     
+    /**
+     * 面积转换
+     *
+     * @param fromUnit 从单位
+     * @param toUnit   单位
+     * @param value    价值
+     * @param scale    规模
+     * @param mode     模式
+     * @return {@link Object }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Object areaConversion(Unit fromUnit, Unit toUnit, Object value, int scale, RoundingMode mode) {
         if (isAreaUnit(fromUnit) && isAreaUnit(toUnit)) {
             if (isNumber(value)) {
@@ -78,22 +166,66 @@ public class ConverterUtils {
     
     //region 体积计算
     
-    public static Object volumeConversion(Unit fromUnit, Unit toUnit,Object value){
-        return volumeConversion(fromUnit, toUnit, value,RoundingMode.HALF_UP);
+    /**
+     * 体积转换
+     *
+     * @param fromUnit 从单位
+     * @param toUnit   单位
+     * @param value    价值
+     * @return {@link Object }
+     * @author Keith
+     * @date 2022-08-17
+     */
+    public static Object volumeConversion(Unit fromUnit, Unit toUnit, Object value) {
+        return volumeConversion(fromUnit, toUnit, value, RoundingMode.HALF_UP);
     }
     
-    public static Object volumeConversion(Unit fromUnit, Unit toUnit,Object value,int scale){
-        return volumeConversion(fromUnit, toUnit, value, scale,RoundingMode.HALF_UP);
+    /**
+     * 体积转换
+     *
+     * @param fromUnit 从单位
+     * @param toUnit   单位
+     * @param value    价值
+     * @param scale    规模
+     * @return {@link Object }
+     * @author Keith
+     * @date 2022-08-17
+     */
+    public static Object volumeConversion(Unit fromUnit, Unit toUnit, Object value, int scale) {
+        return volumeConversion(fromUnit, toUnit, value, scale, RoundingMode.HALF_UP);
     }
     
-    public static Object volumeConversion(Unit fromUnit, Unit toUnit, Object value, RoundingMode mode){
+    /**
+     * 体积转换
+     *
+     * @param fromUnit 从单位
+     * @param toUnit   单位
+     * @param value    价值
+     * @param mode     模式
+     * @return {@link Object }
+     * @author Keith
+     * @date 2022-08-17
+     */
+    public static Object volumeConversion(Unit fromUnit, Unit toUnit, Object value, RoundingMode mode) {
         BigDecimal fromValue = getUnitBase(fromUnit);
         BigDecimal toValue = getUnitBase(toUnit);
         int scale = fromValue.toString().length() - toValue.toString().length();
         return volumeConversion(fromUnit, toUnit, value, scale < 0 ? Math.abs(scale) : 0, mode);
     }
     
-    public static Object volumeConversion(Unit fromUnit, Unit toUnit, Object value,int scale, RoundingMode mode){
+    /**
+     * 体积转换
+     *
+     * @param fromUnit 从单位
+     * @param toUnit   单位
+     * @param value    价值
+     * @param scale    规模
+     * @param mode     模式
+     * @return {@link Object }
+     * @author Keith
+     * @date 2022-08-17
+     */
+    public static Object volumeConversion(Unit fromUnit, Unit toUnit, Object value, int scale, RoundingMode mode) {
         if (isVolumeUnit(fromUnit) && isVolumeUnit(toUnit)) {
             if (isNumber(value)) {
                 BigDecimal fromValue = getUnitBase(fromUnit);
@@ -105,7 +237,15 @@ public class ConverterUtils {
         }
         throw new IllegalArgumentException("params is not volume unit");
     }
-    // endregion
+    
+    /**
+     * 获取单位基地
+     *
+     * @param unit 单位
+     * @return {@link BigDecimal }
+     * @author Keith
+     * @date 2022-08-17
+     */// endregion
     private static BigDecimal getUnitBase(Unit unit) {
         // 基础单位 长度是毫米 面积是平方毫米 体积是立方毫米
         BigDecimal decimal = null;
@@ -178,25 +318,57 @@ public class ConverterUtils {
             case VOL_CUBIC_MILLIMETER:
             default:
                 decimal = new BigDecimal(1);
-            // endregion
+                // endregion
         }
         return decimal;
     }
     
+    /**
+     * 是长度单位
+     *
+     * @param unit 单位
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     private static boolean isLengthUnit(Unit unit) {
         return unit.name().toLowerCase().startsWith("len");
     }
     
+    /**
+     * 是面积单位
+     *
+     * @param unit 单位
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     private static boolean isAreaUnit(Unit unit) {
         return unit.name().toLowerCase().startsWith("area");
     }
     
+    /**
+     * 是体积单位
+     *
+     * @param unit 单位
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     private static boolean isVolumeUnit(Unit unit) {
         return unit.name().toLowerCase().startsWith("vol");
     }
     
+    /**
+     * 是数量
+     *
+     * @param value 价值
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     private static boolean isNumber(Object value) {
-        if (value == null){
+        if (value == null) {
             return false;
         }
         String className = value.getClass().getSimpleName();
@@ -214,6 +386,6 @@ public class ConverterUtils {
     }
     
     public static void main(String[] args) {
-        System.out.println(volumeConversion(Unit.VOL_CUBIC_METER, Unit.VOL_LITRE, 1,12, RoundingMode.HALF_UP));
+        System.out.println(volumeConversion(Unit.VOL_CUBIC_METER, Unit.VOL_LITRE, 1, 12, RoundingMode.HALF_UP));
     }
 }

@@ -133,6 +133,15 @@ public class HttpUtils {
         return result.toString();
     }
     
+    /**
+     * 发送sslpost
+     *
+     * @param url   url
+     * @param param 参数
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String sendSSLPost(String url, String param) {
         StringBuilder result = new StringBuilder();
         String urlNameString = url + "?" + param;
@@ -176,6 +185,13 @@ public class HttpUtils {
         return result.toString();
     }
     
+    /**
+     * 相信任何信任管理器
+     *
+     * @author Keith
+     * @date 2022-08-17
+     * @see X509TrustManager
+     */
     private static class TrustAnyTrustManager implements X509TrustManager {
         @Override
         public void checkClientTrusted(X509Certificate[] chain, String authType) {
@@ -191,6 +207,13 @@ public class HttpUtils {
         }
     }
     
+    /**
+     * 相信任何主机名验证器
+     *
+     * @author Keith
+     * @date 2022-08-17
+     * @see HostnameVerifier
+     */
     private static class TrustAnyHostnameVerifier implements HostnameVerifier {
         @Override
         public boolean verify(String hostname, SSLSession session) {

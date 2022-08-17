@@ -114,6 +114,11 @@ public class Regex {
     public static final String IP ="^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$";
     
     
+    /**
+     * sql注入
+     *
+     * @see String
+     */
     public static final String SQL_INJECTION = "(?:')|(?:--)|(/\\*(?:.|[\\n\\r])*?\\*/)|"
             + "(\\b(select|update|and|or|delete|insert|trancate|char|into|substr|ascii|declare|exec|count|master|into|drop|execute)\\b)";
     

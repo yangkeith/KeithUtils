@@ -43,31 +43,43 @@ public class EncodeUtil {
         byte[] head = new byte[3];
         bis.read(head);
         String charsetName = "GBK";//或GB2312，即ANSI
-    
         if (head[0] == -1 && head[1] == -2 ) {//0xFFFE
-    
             charsetName = "UTF-16";
-    
         } else if (head[0] == -2 && head[1] == -1 ) {//0xFEFF
-    
             charsetName = "Unicode";//包含两种编码格式：UCS2-Big-Endian和UCS2-Little-Endian
-    
         }else if(head[0]==-27 && head[1]==-101 && head[2] ==-98) {
-    
             charsetName = "UTF-8"; //UTF-8(不含BOM)
-    
         }else if(head[0]==-17 && head[1]==-69 && head[2] ==-65) {
-    
             charsetName = "UTF-8"; //UTF-8-BOM
         }
         //System.out.println(code);
     
         return charsetName;
     }
+    
+    /**
+     * 获取编码代码
+     *
+     * @param fileName 文件名称
+     * @return {@link String }
+     * @throws Exception 异常
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String getEncodeCode(String fileName) throws Exception {
         BufferedInputStream bin = new BufferedInputStream(new FileInputStream(fileName));
         return getEncodeCode(bin);
     }
+    
+    /**
+     * 获取编码代码
+     *
+     * @param inputStream 输入流
+     * @return {@link String }
+     * @throws Exception 异常
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String getEncodeCode(InputStream inputStream) throws Exception {
         int p = (inputStream.read() << 8) + inputStream.read();
         inputStream.close();

@@ -33,30 +33,80 @@ public class DateUtil {
     
     private static final Map<String, DateTimeFormatter> datetimeFormaters = new SyncWriteMap<>();
     
+    /**
+     * 获取现在
+     *
+     * @return {@link Date }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Date getUtilNow(){
         return new Date(Calendar.getInstance().getTimeInMillis());
     }
     
+    /**
+     * 获取sql的现在
+     *
+     * @return {@link Date }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static java.sql.Date getSQLNow(){
         return new java.sql.Date(Calendar.getInstance().getTimeInMillis());
     }
     
+    /**
+     * 获取字符串现在
+     *
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String getStringNow(){
         return toString(getUtilNow(),datetimePattern);
     }
     
+    /**
+     * 获取当年
+     *
+     * @return {@link Integer }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Integer getCurYear(){
         return Calendar.getInstance().get(Calendar.YEAR);
     }
     
+    /**
+     * 获取当月
+     *
+     * @return {@link Integer }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Integer getCurMonth(){
         return Calendar.getInstance().get(Calendar.MONTH)+1;
     }
     
+    /**
+     * 获取当天
+     *
+     * @return {@link Integer }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Integer getCurDay(){
         return Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
     }
     
+    /**
+     * 获取日期时间格式化程序
+     *
+     * @param pattern 模式
+     * @return {@link DateTimeFormatter }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static DateTimeFormatter getDateTimeFormatter(String pattern) {
         DateTimeFormatter ret = datetimeFormaters.get(pattern);
         if (ret == null) {
@@ -66,6 +116,14 @@ public class DateUtil {
         return ret;
     }
     
+    /**
+     * 获取简单日期格式
+     *
+     * @param pattern 模式
+     * @return {@link SimpleDateFormat }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static SimpleDateFormat getSimpleDateFormat(String pattern) {
         SimpleDateFormat ret = TL.get().get(pattern);
         if (ret == null) {
@@ -80,43 +138,119 @@ public class DateUtil {
     }
     
     
+    /**
+     * 转日期字符串
+     *
+     * @param date 日期
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String toDateString(Date date) {
         return toString(date, datePattern);
     }
     
     
+    /**
+     * 转分钟字符串
+     *
+     * @param date 日期
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String toDateMinuteString(Date date) {
         return toString(date, dateMinutePattern);
     }
     
+    /**
+     * 日期时间字符串
+     *
+     * @param date 日期
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String toDateTimeString(Date date) {
         return toString(date, datetimePattern);
     }
     
     
+    /**
+     * 到目前为止毫秒字符串
+     *
+     * @param date 日期
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String toDateMillisecondString(Date date) {
         return toString(date, dateMillisecondPattern);
     }
     
     
+    /**
+     * 字符串
+     *
+     * @param date    日期
+     * @param pattern 模式
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String toString(Date date, String pattern) {
         return date == null ? null : getSimpleDateFormat(pattern).format(date);
     }
     
     
+    /**
+     * 字符串
+     *
+     * @param localDateTime 当地日期时间
+     * @param pattern       模式
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String toString(LocalDateTime localDateTime, String pattern) {
         return localDateTime.format(getDateTimeFormatter(pattern));
     }
     
+    /**
+     * 字符串
+     *
+     * @param localDate 当地日期
+     * @param pattern   模式
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String toString(LocalDate localDate, String pattern) {
         return localDate.format(getDateTimeFormatter(pattern));
     }
     
+    /**
+     * 字符串
+     *
+     * @param localTime 当地时间
+     * @param pattern   模式
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String toString(LocalTime localTime, String pattern) {
         return localTime.format(getDateTimeFormatter(pattern));
     }
     
     
+    /**
+     * 解析日期
+     *
+     * @param dateString 日期字符串
+     * @return {@link Date }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Date parseDate(String dateString) {
         if (StringUtil.isBlank(dateString)) {
             return null;
@@ -140,6 +274,14 @@ public class DateUtil {
     }
     
     
+    /**
+     * 获取模式
+     *
+     * @param dateString 日期字符串
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     private static String getPattern(String dateString) {
         int length = dateString.length();
         if (length == datetimePattern.length()) {
@@ -160,6 +302,15 @@ public class DateUtil {
     }
     
     
+    /**
+     * 解析日期
+     *
+     * @param dateString 日期字符串
+     * @param pattern    模式
+     * @return {@link Date }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Date parseDate(String dateString, String pattern) {
         if (StringUtil.isBlank(dateString)) {
             return null;
@@ -172,15 +323,42 @@ public class DateUtil {
     }
     
     
+    /**
+     * 解析本地日期时间
+     *
+     * @param localDateTimeString 本地时间日期字符串
+     * @param pattern             模式
+     * @return {@link LocalDateTime }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static LocalDateTime parseLocalDateTime(String localDateTimeString, String pattern) {
         return LocalDateTime.parse(localDateTimeString, getDateTimeFormatter(pattern));
     }
     
+    /**
+     * 解析本地日期
+     *
+     * @param localDateString 当地日期字符串
+     * @param pattern         模式
+     * @return {@link LocalDate }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static LocalDate parseLocalDate(String localDateString, String pattern) {
         return LocalDate.parse(localDateString, getDateTimeFormatter(pattern));
     }
     
     
+    /**
+     * 当地时间解析
+     *
+     * @param localTimeString 当地时间字符串
+     * @param pattern         模式
+     * @return {@link LocalTime }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static LocalTime parseLocalTime(String localTimeString, String pattern) {
         return LocalTime.parse(localTimeString, getDateTimeFormatter(pattern));
     }
@@ -197,7 +375,6 @@ public class DateUtil {
         if (date instanceof java.sql.Date) {
             date = new Date(date.getTime());
         }
-        
         Instant instant = date.toInstant();
         ZoneId zone = ZoneId.systemDefault();
         return LocalDateTime.ofInstant(instant, zone);
@@ -214,7 +391,6 @@ public class DateUtil {
         if (date instanceof java.sql.Date) {
             date = new Date(date.getTime());
         }
-        
         Instant instant = date.toInstant();
         ZoneId zone = ZoneId.systemDefault();
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
@@ -232,7 +408,6 @@ public class DateUtil {
         if (date instanceof java.sql.Date) {
             date = new Date(date.getTime());
         }
-        
         Instant instant = date.toInstant();
         ZoneId zone = ZoneId.systemDefault();
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
@@ -284,11 +459,9 @@ public class DateUtil {
         if (localDate == null) {
             return null;
         }
-        
         if (localTime == null) {
             localTime = LocalTime.of(0, 0, 0);
         }
-        
         LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
         ZoneId zone = ZoneId.systemDefault();
         Instant instant = localDateTime.atZone(zone).toInstant();
@@ -476,12 +649,10 @@ public class DateUtil {
             cal.set(Calendar.MONTH, 9);
         }
         cal.set(Calendar.DATE, 0);
-        
         cal.set(Calendar.HOUR_OF_DAY, 24);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.MILLISECOND, 0);
-        
         return cal.getTime();
     }
     
@@ -519,13 +690,11 @@ public class DateUtil {
         } else {
             cal.set(Calendar.MONTH, 9);
         }
-        
         cal.set(Calendar.DATE, 0);
         cal.set(Calendar.HOUR_OF_DAY, 24);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.MILLISECOND, 0);
-        
         return cal.getTime();
     }
     

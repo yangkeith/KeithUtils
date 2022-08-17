@@ -13,6 +13,13 @@ import java.io.IOException;
  * @date 2022/04/02 10:21
  */
 public class QuietlyUtil {
+    /**
+     * 静静地关闭
+     *
+     * @param closeables closeables
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static void closeQuietly(Closeable... closeables) {
         if (closeables != null) {
             for (Closeable closeable : closeables) {
@@ -27,6 +34,13 @@ public class QuietlyUtil {
         }
     }
     
+    /**
+     * 安静地睡觉
+     *
+     * @param millis 米尔斯
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static void sleepQuietly(long millis) {
         try {
             Thread.sleep(millis);

@@ -13,6 +13,14 @@ import java.util.Map;
  */
 public class CollectionUtil {
     
+    /**
+     * String转Map
+     *
+     * @param s 年代
+     * @return {@link Map }<{@link String }, {@link String }>
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Map<String,String> string2Map(String s){
         Map<String,String> map =  new HashMap();
         String[] strings = s.split(",");
@@ -27,6 +35,14 @@ public class CollectionUtil {
         return map;
     }
     
+    /**
+     * 是空
+     *
+     * @param collection 集合
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static boolean isEmpty(Collection<?> collection){
         return collection == null || collection.isEmpty();
     }

@@ -30,22 +30,63 @@ public class ArrayUtil {
         return map != null && map.size() > 0;
     }
     
+    /**
+     * 不是空
+     *
+     * @param objects 对象
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static boolean isNotEmpty(Object[] objects) {
         return objects != null && objects.length > 0;
     }
     
+    /**
+     * 是null或空
+     *
+     * @param list 列表
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static boolean isNullOrEmpty(Collection<?> list) {
         return list == null || list.size() == 0;
     }
     
+    /**
+     * 是null或空
+     *
+     * @param map 地图
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static boolean isNullOrEmpty(Map map) {
         return map == null || map.size() == 0;
     }
     
+    /**
+     * 是null或空
+     *
+     * @param objects 对象
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static boolean isNullOrEmpty(Object[] objects) {
         return objects == null || objects.length == 0;
     }
     
+    /**
+     * concat
+     *
+     * @param first 第一个
+     * @param rest  休息
+     * @return {@link T[] }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static <T> T[] concat(T[] first, T[]... rest) {
         int totalLength = first.length;
         for (T[] array : rest) {
@@ -60,11 +101,19 @@ public class ArrayUtil {
         return result;
     }
     
+    /**
+     * 包含
+     *
+     * @param array   数组
+     * @param element 元素
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static <T> boolean contains(T[] array, T element) {
         if (array == null || array.length == 0) {
             return false;
         }
-        
         for (T t : array) {
             if (Objects.equals(t, element)) {
                 return true;
@@ -73,19 +122,25 @@ public class ArrayUtil {
         return false;
     }
     
+    /**
+     * 是相同元素
+     *
+     * @param c1 c1
+     * @param c2 c2
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static boolean isSameElements(Collection<?> c1, Collection<?> c2) {
         if (c1 == c2) {
             return true;
         }
-        
         if ((c1 == null || c1.isEmpty()) && (c2 == null || c2.isEmpty())) {
             return true;
         }
-        
         if (c1 != null && c2 != null && c1.size() == c2.size() && c1.containsAll(c2)) {
             return true;
         }
-        
         return false;
     }
 }

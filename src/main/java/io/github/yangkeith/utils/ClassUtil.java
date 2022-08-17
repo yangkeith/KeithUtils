@@ -53,6 +53,16 @@ public class ClassUtil {
         return (T) ret;
     }
     
+    /**
+     * 单例
+     *
+     * @param clazz       clazz
+     * @param createByAop 创建通过aop
+     * @param inject      注入
+     * @return {@link T }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static synchronized <T> T singleton(Class<T> clazz, boolean createByAop, boolean inject) {
         Object ret = singletons.get(clazz);
         if (ret == null) {
@@ -119,6 +129,16 @@ public class ClassUtil {
     }
     
     
+    /**
+     * 新实例
+     *
+     * @param clazz       clazz
+     * @param createByAop 创建通过aop
+     * @param paras       帕拉斯
+     * @return {@link T }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static <T> T newInstance(Class<T> clazz, boolean createByAop, Object... paras) {
         try {
             Class<?>[] classes = new Class[paras.length];
@@ -144,6 +164,15 @@ public class ClassUtil {
     }
     
     
+    /**
+     * 获取静态构造
+     *
+     * @param name  名字
+     * @param clazz clazz
+     * @return {@link Method }
+     * @author Keith
+     * @date 2022-08-17
+     */
     private static Method getStaticConstruct(String name, Class<?> clazz) {
         Method[] methods = clazz.getDeclaredMethods();
         for (Method method : methods) {
@@ -207,6 +236,14 @@ public class ClassUtil {
     private static final String ENHANCER_BY = "$$EnhancerBy";
     private static final String JAVASSIST_BY = "_$$_";
     
+    /**
+     * 获取有用类
+     *
+     * @param clazz clazz
+     * @return {@link Class }<{@link ? }>
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Class<?> getUsefulClass(Class<?> clazz) {
         final String name = clazz.getName();
         if (name.contains(ENHANCER_BY) || name.contains(JAVASSIST_BY)){
@@ -216,6 +253,15 @@ public class ClassUtil {
     }
     
     
+    /**
+     * 获取类类型
+     *
+     * @param type     类型
+     * @param runClass 运行类
+     * @return {@link ClassType }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static ClassType getClassType(Type type, Class<?> runClass) {
         if (type instanceof Class) {
             return new ClassType((Class<?>) type);
@@ -229,7 +275,6 @@ public class ClassUtil {
             for (int i = 0; i < actualTypeArguments.length; i++) {
                 genericTypes[i] = getClassType(actualTypeArguments[i], runClass);
             }
-            
             classType.setGenericTypes(genericTypes);
             return classType;
         }
@@ -247,6 +292,15 @@ public class ClassUtil {
     }
     
     
+    /**
+     * 获取类型在类定义
+     *
+     * @param runClass     运行类
+     * @param typeVariable 类型变量
+     * @return {@link Type }
+     * @author Keith
+     * @date 2022-08-17
+     */
     private static Type getTypeInClassDefined(Class<?> runClass, TypeVariable<?> typeVariable) {
         Type type = runClass.getGenericSuperclass();
         if (type instanceof ParameterizedType) {
@@ -266,14 +320,20 @@ public class ClassUtil {
     }
     
     
+    /**
+     * 构建方法字符串
+     *
+     * @param method 方法
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String buildMethodString(Method method) {
-        
         StringBuilder sb = new StringBuilder()
                 .append(method.getDeclaringClass().getName())
                 .append(".")
                 .append(method.getName())
                 .append("(");
-        
         Class<?>[] params = method.getParameterTypes();
         int in = 0;
         for (Class<?> clazz : params) {
@@ -282,11 +342,18 @@ public class ClassUtil {
                 sb.append(",");
             }
         }
-        
         return sb.append(")").toString();
     }
     
     
+    /**
+     * 有类
+     *
+     * @param className 类名
+     * @return boolean
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static boolean hasClass(String className) {
         try {
             Class.forName(className, false, getClassLoader());
@@ -297,6 +364,13 @@ public class ClassUtil {
     }
     
     
+    /**
+     * 获取类加载程序
+     *
+     * @return {@link ClassLoader }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static ClassLoader getClassLoader() {
         ClassLoader ret = Thread.currentThread().getContextClassLoader();
         return ret != null ? ret : ClassUtil.class.getClassLoader();

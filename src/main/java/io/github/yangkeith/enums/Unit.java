@@ -42,6 +42,14 @@ public enum Unit {
         return code;
     }
     
+    /**
+     * 从价值
+     *
+     * @param value 价值
+     * @return {@link Unit }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Unit fromValue(String value) {
         for (Unit unit : Unit.values()) {
             if (unit.getValue().equals(value)) {
@@ -51,6 +59,14 @@ public enum Unit {
         throw new IllegalArgumentException("value is invalid");
     }
     
+    /**
+     * 从代码
+     *
+     * @param code 代码
+     * @return {@link Unit }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static Unit fromCode(String code) {
         for (Unit unit : Unit.values()) {
             if (unit.getCode().equals(code)) {

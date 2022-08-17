@@ -83,6 +83,14 @@ public class MD5Util {
         return resultString;
     }
     
+    /**
+     * 编码
+     *
+     * @param origin 起源
+     * @return {@link String }
+     * @author Keith
+     * @date 2022-08-17
+     */
     public static String encode(String origin){
         return md5Encode(origin,"UTF-8");
     }
