@@ -518,4 +518,9 @@ public class StringUtil extends StrKit{
         }
         return sb.toString();
     }
+    
+    public static String replaceLineBreak(String str){
+        return str.replaceAll("(\\\r\\\n|\\\r|\\\n|\\\n\\\r)", "");
+    }
+    
 }

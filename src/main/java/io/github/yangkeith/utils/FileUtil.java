@@ -98,6 +98,23 @@ public class FileUtil {
         return removePrefix(src, PathKit.getWebRootPath());
     }
     
+    public static String readString(InputStream inputStream){
+        ByteArrayOutputStream baos = null;
+        try {
+            baos = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            for (int len = 0; (len = inputStream.read(buffer)) > 0; ) {
+                baos.write(buffer, 0, len);
+            }
+            return new String(baos.toByteArray(), JFinal.me().getConstants().getEncoding());
+        } catch (Exception e) {
+            LogKit.error(e.toString(), e);
+        } finally {
+            close(inputStream, baos);
+        }
+        return null;
+    }
+    
     /**
      * 读取字符串
      *
