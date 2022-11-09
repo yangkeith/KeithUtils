@@ -87,9 +87,8 @@ public class HttpUtils {
         BufferedReader in = null;
         StringBuilder result = new StringBuilder();
         try {
-            String urlNameString = url;
-            log.info("sendPost - {%s}", urlNameString);
-            URL realUrl = new URL(urlNameString);
+            log.info("sendPost - {%s}", url);
+            URL realUrl = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) realUrl.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("accept", "*/*");
